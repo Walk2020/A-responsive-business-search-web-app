@@ -1,0 +1,65 @@
+<div class="col-sm-7 container-sm my-5 border border-light rounded-3 border-2 bg-white py-4 px-4" align = center>
+  <h1>Business search</h1>
+  <form class="row g-3" onsubmit="return false" id="myForm" ngNativeValidate >
+    <div class="col-12 text-start">
+      <label for="keyword" class="form-label requiredInput" >Keyword</label>
+      <input matInput type="text" class="form-control" id="keyword" name="keyword"  required [formControl] = "submitFormKeyWordControl" [matAutocomplete]="auto" [(ngModel)]="yelpPara.term">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" (optionSelected)="onSelected()">
+        <mat-option *ngFor="let item of keywordOptions['terms']" [value]="item.text">
+          {{item.text}}
+        </mat-option>
+        <mat-option *ngFor="let item of keywordOptions['categories']" [value]="item.title">
+          {{item.title}}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+    <div class="col-sm-6 text-start">
+      <label for="distance" class="form-label">Distance</label>
+      <input type="number" min="0" max="25" class="form-control" id="distance" name="distance" required placeholder=10>
+    </div>
+
+    <div class="col-sm-6 text-start">
+      <label for="category" class="form-label requiredInput" >Category</label>
+      <select class="form-select" id="category" name="category"  required>
+        <option value="All"> Default </option>
+        <option value="Arts %26 Entertainment"> Arts and Entertainment </option>
+        <option value="Health %26 Medical"> Health and Medical </option>
+        <option value="Hotels %26 Travel"> Hotels and Travel </option>
+        <option value="Food"> Food </option>
+        <option value="Professional Services"> Professional Services </option>
+      </select>
+    </div>
+
+    <div class="col-12 text-start">
+      <label for="location" class="form-label requiredInput" >Location</label>
+      <input type="text" class="form-control" id="location" name="location" required>
+    </div>
+
+    <div class="col-12 text-start">
+      <input type="checkbox" id = "autoLocation" (click)="autoLocation()">
+      <label for="autoLocation" style="margin-left: 10px;">Auto-detect my location</label>
+    </div>
+
+    <div class = "col-6 px-3 text-end">
+      <button type="submit" class="btn btn-danger" (click)="submitForm()">Submit</button>
+    </div>
+
+    <div class = "col-6 px-3 text-start">
+      <button type="button" class="btn btn-primary" (click)="reset()">Clear</button>
+    </div>
+
+    
+  
+  </form>
+
+</div>
+
+<app-form-card #cardComponent [cardPara] = "cardPara" [ngStyle] ="{'display': cardPara.display}"></app-form-card>
+
+
+<div style="width: 300px;" class="container my-5 rounded-5  bg-white text-center" [ngStyle] ="{'display': noResultDisplay}">
+  <p class="col-12 my-1" style="font-size:medium; font-weight: bold; color: red;">No results available</p>
+</div>
+
+<br>

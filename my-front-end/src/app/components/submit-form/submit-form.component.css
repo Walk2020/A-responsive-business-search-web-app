@@ -1,0 +1,11 @@
+.requiredInput:after {
+  content:"*";
+  color:red;
+}
+
+
+#distance::-webkit-outer-spin-button,
+#distance::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
